@@ -1,28 +1,8 @@
 version: 2.1
-jobs:
+orbs:
+  cypress: cypress-io/cypress@3.0.0
+workflows:
   build:
-    docker:
-      - image: cypress/base:12
-        environment:
-          ## 出力を色付け
-          TERM: xterm
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-      - run:
-          name: 依存関係のインストール
-          command: npm ci
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          # NPM モジュールと、Cypress バイナリ格納ディレクトリをキャッシュする
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run: $(npm bin)/cypress run
-      - store_artifacts:
-          path: ~/repo/api-testing-with-cypress
+    jobs:
+      - cypress/run:
+          start-command: 'npm run start'
