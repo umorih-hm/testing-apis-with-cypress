@@ -33,7 +33,7 @@ commands:
   notify_slack_pass:
     steps:
       - slack/notify:
-          event: fail
+          event: pass
           custom: |
             {
               "blocks": [
@@ -92,7 +92,7 @@ commands:
   notify_slack_fail:
     steps:
       - slack/notify:
-          event: pass
+          event: fail
           custom: |
             {
               "blocks": [
