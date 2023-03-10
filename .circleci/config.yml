@@ -154,8 +154,9 @@ workflows:
   release-workflow:
     jobs:
       - cypress_install:
-          name: cypress install
+          filters:
+            tags:
+              only: /.*/
       - cypress_test:
-          name: cypress test
           requires:
             - cypress_install
