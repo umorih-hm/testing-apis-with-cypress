@@ -1,9 +1,9 @@
 version: 2.1
 
 executors:
-  deploy_container:
+  node:
     docker:
-      - image: circleci/python:3.8.7
+      - image: cimg/node:16.13.1-browsers
 
 orbs:
   slack: circleci/slack@4.3.0
@@ -14,7 +14,7 @@ commands:
     steps:
       - run:
           name: cypress test
-          command: cypress open
+          command: npx cypress open
 
   lint_and_unit_test:
     steps:
