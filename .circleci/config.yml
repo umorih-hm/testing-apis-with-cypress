@@ -21,21 +21,21 @@ commands:
       - run:
           name: lint and unit test
           command: |
-            echo "any lint and unit test command"
+            
 
   deploy:
     steps:
       - run:
           name: deploy
           command: |
-            echo "any deploy command"
+            
 
   e2e_test:
     steps:
       - run:
           name: e2e test
           command: |
-            echo "any deploy command"
+            
 
   notify_slack_pass:
     steps:
