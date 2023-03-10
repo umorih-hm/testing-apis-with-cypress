@@ -7,8 +7,16 @@ executors:
 
 orbs:
   slack: circleci/slack@4.3.0
+  cypress: cypress-io/cypress@3.0.0
 
 commands:
+  cypress_test:
+    steps:
+      - run:
+          name: cypress test
+          command: |
+            npx cypress run
+
   lint_and_unit_test:
     steps:
       - run:
@@ -171,6 +179,14 @@ jobs:
       - notify_slack_fail
       - notify_slack_pass
 
+  cypress_test:
+    executor: deploy_container
+    steps:
+      - checkout
+      - cypress_test
+      - notify_slack_fail
+      - notify_slack_pass
+
 workflows:
   version: 2
   release-workflow:
@@ -191,3 +207,9 @@ workflows:
               only: /.*/
           requires:
             - deploy
+      - cypress_test:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - e2e_test
