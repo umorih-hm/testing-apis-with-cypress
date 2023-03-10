@@ -10,13 +10,6 @@ orbs:
   cypress: cypress-io/cypress@3.0.0
 
 commands:
-  cypress_run:
-    steps:
-      - run:
-          name: cypress run
-          command: |
-            npx cypress run --browser chrome
-
   lint_and_unit_test:
     steps:
       - run:
@@ -181,7 +174,7 @@ jobs:
   cypress_test:
     executor: cypress/default
     steps:
-      - cypress_run
+      - cypress_run: cypress-command:npx cypress run --browser chrome
       - notify_slack_fail
       - notify_slack_pass
 
