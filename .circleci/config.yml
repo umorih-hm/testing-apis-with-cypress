@@ -14,7 +14,8 @@ commands:
     steps:
       - run:
           name: cypress test
-          command: cypress open
+          command: |
+            yarn cypress open
 
   lint_and_unit_test:
     steps:
