@@ -177,7 +177,6 @@ jobs:
       - checkout
       - e2e_test
       - notify_slack_fail
-      - notify_slack_pass
 
   cypress_test:
     executor: deploy_container
