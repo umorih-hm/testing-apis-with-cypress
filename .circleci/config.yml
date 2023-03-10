@@ -10,12 +10,6 @@ orbs:
   cypress: cypress-io/cypress@3.0.0
 
 commands:
-  cypress_test:
-    steps:
-      - run:
-          name: cypress test
-          command: npm run cy:run
-
   lint_and_unit_test:
     steps:
       - run:
@@ -205,9 +199,7 @@ workflows:
               only: /.*/
           requires:
             - deploy
-      - cypress_test:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - e2e_test
+      - cypress/run:
+          cypress-command: npx cypress run --browser chrome
+          install-browsers: true
+          start-command: 'npm run start:dev'
