@@ -15,7 +15,6 @@ commands:
           name: lint and unit test
           command: |
             echo "any lint and unit test command"
-            xxx
 
   deploy:
     steps:
