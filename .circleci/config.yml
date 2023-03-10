@@ -10,7 +10,7 @@ orbs:
   cypress: cypress-io/cypress@3.0.0
 
 commands:
-  cypress/run:
+  cypress_run:
     steps:
       - run:
           name: cypress run
@@ -181,7 +181,7 @@ jobs:
   cypress_test:
     executor: cypress/default
     steps:
-      - cypress/run
+      - cypress_run
       - notify_slack_fail
       - notify_slack_pass
 
