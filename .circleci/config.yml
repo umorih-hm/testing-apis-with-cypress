@@ -15,7 +15,7 @@ commands:
       - run:
           name: cypress test
           command: |
-            yarn cypress open
+            npx cypress run --headless --component
 
   lint_and_unit_test:
     steps:
