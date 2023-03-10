@@ -175,10 +175,17 @@ jobs:
     executor: cypress/default
     steps:
       - cypress/install
+      - persist_to_workspace:
+          paths:
+            - .cache/Cypress
+            - project
+          root: ~/
 
   cypress_test:
     executor: cypress/default
     steps:
+      - attach_workspace:
+          at: ~/
       - cypress/run-tests:
           cypress-command: npx cypress run --browser chrome
       - notify_slack_fail
