@@ -171,6 +171,11 @@ jobs:
       - e2e_test
       - notify_slack_fail
 
+  install-and-persist:
+    executor: cypress/default
+    steps:
+      - cypress/install
+
   cypress_test:
     executor: cypress/default
     steps:
@@ -200,6 +205,9 @@ workflows:
               only: /.*/
           requires:
             - deploy
-      - cypress_test:
+      - install-and-persist:
           requires:
             - e2e_test
+      - cypress_test:
+          requires:
+            - install-and-persist
