@@ -156,6 +156,6 @@ workflows:
       - cypress_install:
           name: cypress install
       - cypress_test:
-          name: cypress install
+          name: cypress test
           requires:
             - cypress_install
