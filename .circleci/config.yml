@@ -174,7 +174,7 @@ jobs:
   cypress_test:
     executor: cypress/default
     steps:
-      - cypress_run: cypress-command:npx cypress run --browser chrome
+      - run: command:npx cypress run --browser chrome
       - notify_slack_fail
       - notify_slack_pass
 
