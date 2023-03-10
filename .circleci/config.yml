@@ -172,10 +172,9 @@ jobs:
       - notify_slack_fail
 
   cypress_test:
-    executor: deploy_container
+    executor: cypress/default
     steps:
-      - checkout
-      - cypress_test
+      - cypress/run: cypress-command:npx cypress run --browser chrome
       - notify_slack_fail
       - notify_slack_pass
 
@@ -199,6 +198,6 @@ workflows:
               only: /.*/
           requires:
             - deploy
-      - cypress/run:
-          cypress-command: npx cypress run --browser chrome
-          install-browsers: true
+      - cypress_test:
+          requires:
+            - e2e_test
