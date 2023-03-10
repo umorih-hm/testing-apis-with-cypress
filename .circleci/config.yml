@@ -14,7 +14,7 @@ commands:
     steps:
       - run:
           name: cypress test
-          command: npm run test
+          command: cypress open
 
   lint_and_unit_test:
     steps:
