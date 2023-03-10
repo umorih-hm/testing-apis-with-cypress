@@ -16,27 +16,6 @@ commands:
           name: cypress test
           command: npx cypress open
 
-  lint_and_unit_test:
-    steps:
-      - run:
-          name: lint and unit test
-          command: |
-            
-
-  deploy:
-    steps:
-      - run:
-          name: deploy
-          command: |
-            
-
-  e2e_test:
-    steps:
-      - run:
-          name: e2e test
-          command: |
-            
-
   notify_slack_pass:
     steps:
       - slack/notify:
@@ -156,27 +135,6 @@ commands:
             }
 
 jobs:
-  lint_and_unit_test:
-    executor: deploy_container
-    steps:
-      - checkout
-      - lint_and_unit_test
-      - notify_slack_fail
-
-  deploy:
-    executor: deploy_container
-    steps:
-      - checkout
-      - deploy
-      - notify_slack_fail
-
-  e2e_test:
-    executor: deploy_container
-    steps:
-      - checkout
-      - e2e_test
-      - notify_slack_fail
-
   cypress_test:
     executor: deploy_container
     steps:
@@ -189,22 +147,6 @@ workflows:
   version: 2
   release-workflow:
     jobs:
-      - lint_and_unit_test:
-          filters:
-            tags:
-              only: /.*/
-      - deploy:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - lint_and_unit_test
-      - e2e_test:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - deploy
       - cypress_test:
           filters:
             tags:
